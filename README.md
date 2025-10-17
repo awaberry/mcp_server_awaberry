@@ -1,6 +1,6 @@
 # awaberry Remote MCP Server
 
-A Node.js MCP server to remote connect to devices without the need for SSH, VPN and open ports to manage files, connect to databases and execute terminal commands in a persistent long running terminal session.
+A Node.js based Model Context Protocol (MCP) server to remote connect to devices without the need for SSH, VPN and open ports to manage files, connect to databases and execute terminal commands in a persistent long running terminal session.
 
 This is a JavaScript-based MCP server that provides remote device access through the awaBerry platform. It demonstrates core MCP concepts by providing:
 
@@ -62,6 +62,7 @@ On reconnecting to the device, the last state of the terminal is available - thi
 If you have received the awaBerry MCP Server URL (e.g. to use for your company), there is no need to do the installation.
 
 For setting an own server, e.g. in Cloudflare, follow the instructions in section JSON based MCP Server.
+
 See [JSON server configuration in Claude Desktop](#claude-json-server-config) for the required setup.
 
 ### Prerequisites
