@@ -57,7 +57,12 @@ On reconnecting to the device, the last state of the terminal is available - thi
   - `result.commandResult` (string): Output from the command.
   - `result.lastCommandEndedOnTerminal` (boolean): Indicates if the command process has completed.
 
-## Setup
+## Setup MCP Server on local environment
+
+If you have received the awaBerry MCP Server URL (e.g. to use for your company), there is no need to do the installation.
+
+For setting an own server, e.g. in Cloudflare, follow the instructions in section JSON based MCP Server.
+See [JSON server configuration in Claude Desktop](#claude-json-server-config) for the required setup.
 
 ### Prerequisites
 
@@ -159,7 +164,7 @@ stdio version
 
 **Important:** Replace `/absolute/path/to/mcp_server_awaberry` with the actual absolute path to your installation (e.g., `/Users/username/projects/mcp_server_awaberry`).
 
-
+<a id="claude-json-server-config"></a>
 ### Configuration of MCP via an installed server instance
 
 To use the JSON based instance, use the json version
