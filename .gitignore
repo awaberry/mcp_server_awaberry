@@ -1,0 +1,11 @@
+.env
+node_modules
+activitylog.log
+.wrangler/
+node_modules/
+.idea/
+package-lock.json
+/httpservertest/*
+/httpserver/*
+
+

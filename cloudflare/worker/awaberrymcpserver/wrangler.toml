@@ -1,0 +1,7 @@
+name = "awaberrymcpserver"
+main = "src/index.js"
+compatibility_date = "2024-09-23"
+
+# Enable Node.js compatibility mode.
+# This is required because a dependency (@modelcontextprotocol/sdk) uses Node.js APIs like 'crypto' and 'buffer'.
+compatibility_flags = ["nodejs_compat"]

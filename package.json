@@ -1,0 +1,19 @@
+{
+  "type": "module",
+  "name": "mcp_server_awaberry",
+  "version": "1.0.0",
+  "scripts": {
+    "start:mcp:json": "node mcpserver/awaBerryAgenticMcpServerHttpJson.js",
+    "test:mcp:json": "node test/mcpservertest/testMcpServerJson.js",
+    "start:mcp:stdio": "node mcpserver/awaBerryAgenticMcpServerStdio.js",
+    "test:mcp:stdio": "node test/mcpservertest/testMcpServerLocalStdio.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "dotenv": "^17.2.3",
+    "express": "^4.19.2",
+    "node-fetch": "^2.7.0",
+    "winston": "^3.18.3",
+    "zod": "^3.25.76"
+  }
+}
