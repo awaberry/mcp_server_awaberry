@@ -281,7 +281,8 @@ Check your plan details at [awaberry Agentic](https://www.awaberry.com/) for spe
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Please feel free to submit a Pull Request or contact us.
+- **Contact us:** [www.awaberry.com/contact](https://www.awaberry.com/contact)
 
 ## Support
 
