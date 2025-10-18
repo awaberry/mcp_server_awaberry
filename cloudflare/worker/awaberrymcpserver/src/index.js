@@ -69,12 +69,14 @@ function createMcpServer(env) {
         version: '1.0.0',
     });
 
+
+
     server.tool(
         'connect_to_device',
-        'Connects to a MAC, Linux, Windows or Docker environment linked via awaberry',
+        'Connect to a device via awaBerry Remote without the need for ssh/scp/firewalls. This establishes a secure terminal connection to manage files, connect to databases and execute terminal commands in a persistent long running terminal session.',
         {
-            projectKey: z.string().optional().describe('Authentication key (or use AWABERRY_PROJECT_KEY env var)'),
-            projectSecret: z.string().optional().describe('Authentication secret (or use AWABERRY_PROJECT_SECRET env var)'),
+            projectKey: z.string().optional().describe('Authentication key AWABERRY_PROJECT_KEY'),
+            projectSecret: z.string().optional().describe('Authentication secret AWABERRY_PROJECT_SECRET'),
             deviceName: z.string().describe('The name of the device to connect to'),
         },
         async (args) => {

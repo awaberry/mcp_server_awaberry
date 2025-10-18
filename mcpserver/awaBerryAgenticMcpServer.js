@@ -31,10 +31,10 @@ export function createMcpServer() {
         'connect_to_device',
         {
             title: 'Connect to Device',
-            description: 'Connects to a MAC, Linux, Windows or Docker environment linked via awaberry to execute commands on terminal',
+            description: "Connect to a device via awaBerry Remote without the need for ssh/scp/firewalls. This establishes a secure terminal connection to manage files, connect to databases and execute terminal commands in a persistent long running terminal session.",
             inputSchema: {
-                projectKey: z.string().optional().describe('The project key for authentication (defaults to AWABERRY_PROJECT_KEY env var)'),
-                projectSecret: z.string().optional().describe('The project secret for authentication (defaults to AWABERRY_PROJECT_SECRET env var)'),
+                projectKey: z.string().optional().describe('The project key for authentication'),
+                projectSecret: z.string().optional().describe('The project secret for authentication'),
                 deviceName: z.string().describe('The name of the device to connect to')
             },
             outputSchema: {

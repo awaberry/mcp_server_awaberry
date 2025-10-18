@@ -1,0 +1,7 @@
+{
+  "serverUrl": "https://<serverurl>/mcp",
+  "env": {
+    "AWABERRY_PROJECT_KEY": "your_project_key_here",
+    "AWABERRY_PROJECT_SECRET": "your_project_secret_here"
+  }
+}
