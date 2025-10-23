@@ -71,6 +71,9 @@ On success the json result the of the command result is printed ending with
 
 Double-check the provided values in projectKey and projectSecret and try again
 
+### Device with name '...' not found
+
+
 
 ## Support
 

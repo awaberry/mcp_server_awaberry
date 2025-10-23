@@ -9,6 +9,10 @@ This is a JavaScript-based MCP server that provides remote device access through
 - Remote terminal command execution
 - Session-based authentication
 
+
+[![awaBerry Agentic Claude Desktop Introduction](https://www.awaberry.com/assets/images/gif/introAwaberryAgenticClaudeDesktop.gif)](https://www.awaberry.com/)
+
+
 ## Prerequisites
 
 An account at app.awaberry.com and a device linked to awaBerry Remote.
@@ -177,7 +181,7 @@ To use the JSON based instance, use the json version
       "command": "npx",
       "args": [
         "-y",
-        "@modelcontextprotocol/server-everything",
+        "mcp-remote",
         "${AWABERRY_MCP_SERVER_URL}"
       ],
       "env": {
