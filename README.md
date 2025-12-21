@@ -10,24 +10,44 @@ This is a JavaScript-based MCP server that provides remote device access through
 - Session-based authentication
 
 
+
+
 [![awaBerry Agentic Claude Desktop Introduction](https://www.awaberry.com/assets/images/gif/introAwaberryAgenticClaudeDesktop.gif)](https://www.awaberry.com/)
 
 
-## Prerequisites
+## Getting credentials.
+
+Access to the awaBerry platform via an MCP Server is provided via project key and project secret. Either setup own projects for your own devices or receive the credentials.
+
+### Create an own project
 
 An account at app.awaberry.com and a device linked to awaBerry Remote.
 
 1. Sign up at [awaberry Remote](https://app.awaberry.com/).
 2. Add one or more devices.
-3. Create a new project under section awaBerryAgentic.
+3. Create a new project under section awaBerry Agentic.
 4. Register your devices with the project.
 5. Copy your project key and secret from the project settings.
 
 Read more about awaBerry at [www.awaberry.com](https://www.awaberry.com/)
 
+### Received project credentials
+
+You have received project key and secret, e.g. via company IT  or a friend.
+
+### Demo access
+
+To connect to a demo project, use the following credentials
+- project key: <B>demokey</B>
+- project secret: <B>demosecret</B>
+- name of the device: <B>demodevice</B>
+
+
 ## Features
 
 ### Tools
+
+The awaBerry mcp consists of the following tools:
 
 **`connect_to_device`**
 
@@ -61,94 +81,49 @@ On reconnecting to the device, the last state of the terminal is available - thi
   - `result.commandResult` (string): Output from the command.
   - `result.lastCommandEndedOnTerminal` (boolean): Indicates if the command process has completed.
 
-## Setup MCP Server on local environment
 
-If you have received the awaBerry MCP Server URL (e.g. to use for your company), there is no need to do the installation.
 
-For setting an own server, e.g. in Cloudflare, follow the instructions in section JSON based MCP Server.
-
-See [JSON server configuration in Claude Desktop](#claude-json-server-config) for the required setup.
+## Installation
 
 ### Prerequisites
 
 - Node.js >= 18 ([Download](https://nodejs.org/)).
 - Git installed ([Download](https://git-scm.com/downloads)).
 
-### Installation
+### Download
+
+Open a terminal and optionally create a folder for the awaBerry mcp server
 
 ```bash
+
+# optionally
+cd $HOME
+mkdir awaberry
+cd awaberry 
+
 # Clone the repository
 git clone https://github.com/awaberry/mcp_server_awaberry.git
 cd mcp_server_awaberry
 
 # Install dependencies
 npm install
+
+PWD
+# outputs the absolute path to mcp_server_awaberry which will be required in the later configuration setup
+
 ```
 
-### Available MCP Server Implementations
+### Setup of an awaBerry MCP Server in company environments
 
-#### JSON based MCP Server
-
-The JSON based MCP server is the best choice in company setups. Install one instance which can be accessed by all employees.
-
-- On premise installation
-
-See mcpserver/awaBerryAgenticMcpServerHttpJson.js as a reference implementation of the awaBerry MCP server on a server running in the company intranet or cloud.
-
-- Cloudflare installation
-
-To deploy a Cloudflare worker instance, follow the instructions of [README.md](cloudflare/worker/awaberrymcpserver/README.md) in folder cloudflare/worker/awaberrymcpserver
-
-### Run & Test
-
-Before using this MCP server within Agent environments, it is recommended to test the awaBerry project credentials
-
-#### Method test
-
-Test the correct awaBerry Agentic project setup by calling the methods to connect to device and execute commands directly.
-
-Follow the instructions of [README.md](test/methodtest/README.md) in folder test/methodtest.
-
-#### MCP server test to remote server via json
-
-Follow the setup routines in the previous section before testing the mcp server.
-
-- Test MCP server json mode :
-  In a terminal screen A execute
-```bash
-  npm run start:mcp:json
-```
-
-In a terminal screen B execute
-```bash
-  npm run test:mcp:json
-```
-
-
-- Test MCP server stdio mode :
-In a terminal screen A execute
-```bash
-  npm run start:mcp:stdio
-```
-
-In a terminal screen B execute
-```bash
-  npm run test:mcp:stdio
-```
-
+Please read the file [MCPSERVER.md](MCPSERVER.md) for setup instructions of an awaBerry MCP Server in local environments or as a Cloudflare worker.
 
 
 ## Setup in Claude Desktop
 
-To use with Claude Desktop, add the server configuration to your `claude_desktop_config.json` file.
+To use awaBerry with Claude Desktop, add the server configuration to your `claude_desktop_config.json` file.
 
 - **On macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
 - **On Windows:** `%APPDATA%/Claude/claude_desktop_config.json`
-
-### Configuration of MCP on same device
-
-To access the awaBerry with the configuration on the same device such as Claude Desktop (i.e. your Laptop / PC), use the 
-stdio version
 
 ```json
 {
@@ -156,49 +131,53 @@ stdio version
     "awaberry": {
       "command": "node",
       "args": [
-        "/absolute/path/to/mcp_server_awaberry/mcpserver/awaBerryAgenticMcpServerStdio.js"
-      ],
-      "env": {
-        "AWABERRY_PROJECT_KEY": "your_project_key_here",
-        "AWABERRY_PROJECT_SECRET": "your_project_secret_here"
-      }
+        "/absolute/path/to/mcp_server_awaberry/mcp_server_awaberry/mcpclients/start-awaberry-mcp.js"
+      ]
+      
     }
   }
 }
 ```
-
 **Important:** Replace `/absolute/path/to/mcp_server_awaberry` with the actual absolute path to your installation (e.g., `/Users/username/projects/mcp_server_awaberry`).
 
-<a id="claude-json-server-config"></a>
-### Configuration of MCP via an installed server instance
+### Configuration of the MCP server and credentials
 
-To use the JSON based instance, use the json version
+To the awaBerry MCP server, add the following configurations
+
+To setup of server url, project key and project secret, edit the file
+
+<B>/absolute/path/to/mcp_server_awaberry/mcp_server_awaberry/mcpclients/awaberry-config.json</B>
 
 ```json
 {
-  "mcpServers": {
-    "awaberry": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "mcp-remote",
-        "${AWABERRY_MCP_SERVER_URL}"
-      ],
-      "env": {
-        "AWABERRY_MCP_SERVER_URL": "https://your-worker.workers.dev/mcp",
-        "AWABERRY_PROJECT_KEY": "your_project_key_here",
-        "AWABERRY_PROJECT_SECRET": "your_project_secret_here"
-      }
-    }
+  "serverUrl": "<serverUrl>",
+  "env": {
+    "AWABERRY_PROJECT_KEY": "<AWABERRY_PROJECT_KEY>",
+    "AWABERRY_PROJECT_SECRET": "<AWABERRY_PROJECT_KEY>"
   }
 }
-
 ```
 
-**Important:** Replace `AWABERRY_MCP_SERVER_URL` with the URL of the deployed MCP JSON server endpoint. Ensure the URL ends with /mcp, e.g. http://your-worker.workers.dev/mcp
+**Important:** Replace
+- serverUrl: with the server your company IT team has installed for you or your local mcp server. Start your local mcp server as follow:
 
+For connecting via a local mcp server, use <serverUrl> http://localhost:3000/mcp.
+For starting the mcp server do in a terminal
 
+```bash
+  cd /absolute/path/to/mcp_server_awaberry/mcp_server_awaberry/
+   npm run start:mcp:json
+```
 
+To monitor the mcp server log open another terminal and type
+
+```bash
+  cd /absolute/path/to/mcp_server_awaberry/mcp_server_awaberry/
+  tail -f activitylog.log
+```
+
+- AWABERRY_PROJECT_KEY: the received project key for an awaBerry Agentic project
+- AWABERRY_PROJECT_SECRET: the received project secret.
 
 ### Usage Examples
 
@@ -208,13 +187,13 @@ Once configured, restart Claude Desktop and use natural language to interact wit
   > Connect to my device "laptop-macos"
 
 - **List files:**
-  > Show me all files in /Users/myuser/Documents
+  > Show me all files in my home directory
 
 - **Read a file:**
-  > Read the contents of /etc/hosts
+  > Read the contents of file <filename>
 
 - **Execute complex commands:**
-  > Find all JavaScript files modified in the last 7 days in my home directory
+  > Find all text files files modified in the last 7 days in my home directory
 
 - **Run scripts:**
   > Execute the backup script at ~/scripts/backup.sh
@@ -241,7 +220,7 @@ All activity is logged to `activitylog.log` in the project root directory. Logs 
 Rate limits are enforced by the awaberry platform:
 
 - **Connection attempts:** As needed.
-- **Command executions:** Based on your plan tier.
+- **Command executions:** Based on the plan tier of awaBerry.
 
 Check your plan details at [awaberry Agentic](https://www.awaberry.com/) for specific limits.
 
@@ -256,6 +235,7 @@ Check your plan details at [awaberry Agentic](https://www.awaberry.com/) for spe
 
 ### Connection fails
 
+- Allow Claude Desktop to execute requests to awaBerry, it it asks for permissions.
 - Verify your project key and secret are correct in the environment variables.
 - Ensure the device name matches exactly (it is case-sensitive).
 - Check that the device is online and connected to awaberry.
@@ -264,7 +244,6 @@ Check your plan details at [awaberry Agentic](https://www.awaberry.com/) for spe
 
 ### Commands don't execute
 
-- Verify the session token is valid.
 - Check that the device is still connected.
 - Ensure the command syntax is correct for the target OS.
 - Review command output in `activitylog.log`.
