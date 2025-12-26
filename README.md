@@ -4,12 +4,13 @@ A Node.js based Model Context Protocol (MCP) server to remote connect to devices
 
 This is a JavaScript-based MCP server that provides remote device access through the awaBerry platform. It demonstrates core MCP concepts by providing:
 
+<B>Device as a service</B>
 - Integration with the awaberry Agentic platform
 - Secure device connection management
 - Remote terminal command execution
 - Session-based authentication
 
-
+<B>This allows for powerful workflows</B> allowing any Agent and Large Language Model based routine to execute commands on your devices for getting access to required data - and to also write genrated data back.
 
 
 [![awaBerry Agentic Claude Desktop Introduction](https://www.awaberry.com/assets/images/gif/introAwaberryAgenticClaudeDesktop.gif)](https://www.awaberry.com/)
@@ -144,9 +145,16 @@ To use awaBerry with Claude Desktop, add the server configuration to your `claud
 
 To the awaBerry MCP server, add the following configurations
 
-To setup of server url, project key and project secret, edit the file
+To setup of server url, project key and project secret, copy the file awaberry-config.json.example to awaberry-config.json.
 
-<B>/absolute/path/to/mcp_server_awaberry/mcp_server_awaberry/mcpclients/awaberry-config.json</B>
+In a terminal type
+
+```bash
+  cd /absolute/path/to/mcp_server_awaberry/mcp_server_awaberry/mcpclients
+  cp awaberry-config.json.example awaberry-config.json
+```
+
+Edit the file <B>awaberry-config.json</B>.
 
 ```json
 {
